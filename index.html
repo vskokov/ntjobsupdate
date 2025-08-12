@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theoretical Nuclear Physics Jobs</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background-color: #0f172a; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Load Job Data from external file -->
+    <script src="jobData.js"></script>
+
+    <!-- Main App -->
+    <script type="text/babel">
+        const { useState } = React;
+        
+        const JobCard = ({ job }) => (
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 shadow-lg hover:shadow-xl hover:border-slate-600 transition-all">
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-semibold text-blue-400 hover:text-blue-300">
+                        <a href={job.url} target="_blank" rel="noopener noreferrer">
+                            {job.university}
+                        </a>
+                    </h3>
+                    <span className="bg-slate-700 text-slate-200 text-sm px-2 py-1 rounded">
+                        {job.code}
+                    </span>
+                </div>
+                
+                <div className="space-y-2 mb-4">
+                    <p className="text-slate-300">{job.position}</p>
+                    <p className="text-sm text-slate-400">
+                        <span className="font-medium text-slate-300">Deadline:</span> {job.deadline}
+                    </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 className="font-medium text-slate-200 mb-2">Short List:</h4>
+                        <div className="text-sm text-slate-400">
+                            {job.shortlist.length > 0 ? (
+                                <ul className="space-y-1">
+                                    {job.shortlist.map((name, idx) => (
+                                        <li key={idx} className="text-slate-300">{name}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <span className="text-slate-500">No information yet</span>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 className="font-medium text-slate-200 mb-2">Offers:</h4>
+                        <div className="text-sm text-slate-400">
+                            {job.offers.length > 0 ? (
+                                <ul className="space-y-1">
+                                    {job.offers.map((name, idx) => (
+                                        <li key={idx} className="text-slate-100 font-bold">{name}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <span className="text-slate-500">No offers reported</span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const Navigation = ({ currentYear, onYearChange }) => {
+            const years = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019];
+            
+            return (
+                <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-10">
+                    <div className="max-w-6xl mx-auto px-4">
+                        <div className="flex justify-between items-center h-16">
+                            <div className="text-xl font-bold text-slate-100">
+                                Nuclear Theory Jobs
+                            </div>
+                            
+                            <div className="flex space-x-1 overflow-x-auto">
+                                {years.map(year => (
+                                    <button
+                                        key={year}
+                                        onClick={() => onYearChange(year)}
+                                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
+                                            currentYear === year
+                                                ? 'bg-blue-600 text-white'
+                                                : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800'
+                                        }`}
+                                    >
+                                        {year}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        const InfoSection = () => (
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-8">
+                <div className="grid md:grid-cols-3 gap-6 text-sm">
+                    <div>
+                        <h3 className="font-semibold text-blue-400 mb-2">About</h3>
+                        <p className="text-slate-300">
+                            This webpage tracks faculty positions in theoretical nuclear physics. 
+                            Information is submitted by volunteers and kept confidential.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 className="font-semibold text-blue-400 mb-2">Contact</h3>
+                        <p className="text-slate-300">
+                            Submit information to: <br />
+                            <span className="font-mono text-blue-300">nucleartheoryjobs@gmail.com</span>
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 className="font-semibold text-blue-400 mb-2">Last Update</h3>
+                        <p className="text-slate-300">
+                            {window.jobDataMeta?.lastUpdate || "OSU position"}<br />
+                            {window.jobDataMeta?.lastUpdateDate || "May 9, 2025"}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ExternalLinks = () => (
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
+                <h3 className="font-semibold text-slate-200 mb-4">Other Job Sites</h3>
+                <div className="grid md:grid-cols-2 gap-2 text-sm">
+                    <a href="http://www.astrobetter.com/wiki/tiki-index.php?page=Rumor+Mill+Faculty-Staff" 
+                       className="text-blue-400 hover:text-blue-300">Astrophysics</a>
+                    <a href="http://particle.physics.ucdavis.edu/rumor/doku.php" 
+                       className="text-blue-400 hover:text-blue-300">Particle Theory (N. America)</a>
+                    <a href="http://cmamorumor.wikispaces.com" 
+                       className="text-blue-400 hover:text-blue-300">Condensed Matter & AMO</a>
+                    <a href="http://antiann.org/yiyin/nucl_th_postdoc.html" 
+                       className="text-blue-400 hover:text-blue-300">Nuclear Theory Postdocs</a>
+                    <a href="http://gasdrumor.bplaced.net/" 
+                       className="text-blue-400 hover:text-blue-300">Particle Theory (Germanic/Nordic)</a>
+                    <a href="http://jobsrumormilljp.web.fc2.com/index.html" 
+                       className="text-blue-400 hover:text-blue-300">Particle Theory (Japan/E. Asia)</a>
+                    <a href="http://pyweb.swan.ac.uk/~pybl/rumours/" 
+                       className="text-blue-400 hover:text-blue-300">Particle Theory (UK/Ireland)</a>
+                </div>
+            </div>
+        );
+
+        const HistoricalArchive = () => {
+            const historicalYears = [
+                { year: "2002", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0102.html" },
+                { year: "2003", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0203.html" },
+                { year: "2004", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0304.html" },
+                { year: "2005", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0405.html" },
+                { year: "2006", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0506.html" },
+                { year: "2007", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0607.html" },
+                { year: "2008", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0708.html" },
+                { year: "2009", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0809.html" },
+                { year: "2010", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0910.html" },
+                { year: "2011", url: "http://www.int.washington.edu/users/mjs5/NucRum/NTrumors_1011.html" },
+                { year: "2012", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2012.html" },
+                { year: "2013", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2013.html" },
+                { year: "2014", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2014.html" },
+                { year: "2015", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2015.html" },
+                { year: "2016", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2016.html" },
+                { year: "2017", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2017.html" },
+                { year: "2018", url: "http://www.physics.ncsu.edu/ntg/jobs/index_2018.html" }
+            ];
+            
+            return (
+                <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
+                    <h3 className="font-semibold text-slate-200 mb-4">Historical Archive</h3>
+                    <div className="flex flex-wrap gap-2 text-sm">
+                        {historicalYears.map(({ year, url }) => (
+                            <a key={year} href={url} className="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">
+                                {year}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [currentYear, setCurrentYear] = useState(2026);
+            const jobs = window.jobData[currentYear] || [];
+
+            return (
+                <div className="min-h-screen bg-slate-900">
+                    <Navigation currentYear={currentYear} onYearChange={setCurrentYear} />
+                    
+                    <div className="max-w-6xl mx-auto px-4 py-8">
+                        <div className="mb-8">
+                            <h1 className="text-3xl font-bold text-slate-100 mb-2">
+                                Theoretical Nuclear Physics Jobs {currentYear}
+                            </h1>
+                            <p className="text-slate-400">
+                                Faculty positions and hiring information for the {currentYear} academic job market
+                            </p>
+                        </div>
+                        
+                        <InfoSection />
+                        
+                        <div className="space-y-6">
+                            {jobs.length > 0 ? (
+                                jobs.map((job, index) => (
+                                    <JobCard key={index} job={job} />
+                                ))
+                            ) : (
+                                <div className="text-center py-12 text-slate-500">
+                                    <p>No job data available for {currentYear}</p>
+                                    <p className="text-sm mt-2">Check other years or check back later for updates</p>
+                                </div>
+                            )}
+                        </div>
+                        
+                        <ExternalLinks />
+                        <HistoricalArchive />
+                        
+                        <div className="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-500">
+                            <p>
+                                Information is provided as a public service. No guarantee of accuracy is expressed or implied.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
