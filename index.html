@@ -4,244 +4,445 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theoretical Nuclear Physics Jobs</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background-color: #0f172a; }
+        body { 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+            background-color: #0f172a; 
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-
-    <!-- Load Job Data from external file -->
-    <script src="jobData.js"></script>
-
-    <!-- Main App -->
-    <script type="text/babel">
-        const { useState } = React;
-        
-        const JobCard = ({ job }) => (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 shadow-lg hover:shadow-xl hover:border-slate-600 transition-all">
-                <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-semibold text-blue-400 hover:text-blue-300">
-                        <a href={job.url} target="_blank" rel="noopener noreferrer">
-                            {job.university}
-                        </a>
-                    </h3>
-                    <span className="bg-slate-700 text-slate-200 text-sm px-2 py-1 rounded">
-                        {job.code}
-                    </span>
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-xl font-bold text-slate-100">
+                    Nuclear Theory Jobs
                 </div>
                 
-                <div className="space-y-2 mb-4">
-                    <p className="text-slate-300">{job.position}</p>
-                    <p className="text-sm text-slate-400">
-                        <span className="font-medium text-slate-300">Deadline:</span> {job.deadline}
+                <div id="yearTabs" class="flex space-x-1 overflow-x-auto">
+                    <!-- Year tabs will be generated here -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 id="pageTitle" class="text-3xl font-bold text-slate-100 mb-2">
+                Theoretical Nuclear Physics Jobs 2026
+            </h1>
+            <p class="text-slate-400">
+                Faculty positions and hiring information for the <span id="yearSpan">2026</span> academic job market
+            </p>
+        </div>
+        
+        <!-- Info Section -->
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-8">
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div>
+                    <h3 class="font-semibold text-blue-400 mb-2">About</h3>
+                    <p class="text-slate-300">
+                        This webpage tracks faculty positions in theoretical nuclear physics. 
+                        Information is submitted by volunteers and kept confidential.
                     </p>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <h4 className="font-medium text-slate-200 mb-2">Short List:</h4>
-                        <div className="text-sm text-slate-400">
-                            {job.shortlist.length > 0 ? (
-                                <ul className="space-y-1">
-                                    {job.shortlist.map((name, idx) => (
-                                        <li key={idx} className="text-slate-300">{name}</li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <span className="text-slate-500">No information yet</span>
-                            )}
-                        </div>
+                <div>
+                    <h3 class="font-semibold text-blue-400 mb-2">Contact</h3>
+                    <p class="text-slate-300">
+                        Submit information to: <br />
+                        <span class="font-mono text-blue-300">nucleartheoryjobs@gmail.com</span>
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-blue-400 mb-2">Last Update</h3>
+                    <p class="text-slate-300">
+                        OSU position<br />
+                        May 9, 2025
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Job Cards Container -->
+        <div id="jobsContainer" class="space-y-6">
+            <!-- Jobs will be rendered here -->
+        </div>
+        
+        <!-- External Links -->
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
+            <h3 class="font-semibold text-slate-200 mb-4">Other Job Sites</h3>
+            <div class="grid md:grid-cols-2 gap-2 text-sm">
+                <a href="https://www.astrobetter.com/wiki/tiki-index.php?page=Rumor+Mill+Faculty-Staff" 
+                   class="text-blue-400 hover:text-blue-300">Astrophysics</a>
+                <a href="https://particle.physics.ucdavis.edu/rumor/doku.php" 
+                   class="text-blue-400 hover:text-blue-300">Particle Theory (N. America)</a>
+                <a href="https://cmamorumor.wikispaces.com" 
+                   class="text-blue-400 hover:text-blue-300">Condensed Matter & AMO</a>
+                <a href="https://antiann.org/yiyin/nucl_th_postdoc.html" 
+                   class="text-blue-400 hover:text-blue-300">Nuclear Theory Postdocs</a>
+                <a href="https://gasdrumor.bplaced.net/" 
+                   class="text-blue-400 hover:text-blue-300">Particle Theory (Germanic/Nordic)</a>
+                <a href="https://jobsrumormilljp.web.fc2.com/index.html" 
+                   class="text-blue-400 hover:text-blue-300">Particle Theory (Japan/E. Asia)</a>
+                <a href="https://pyweb.swan.ac.uk/~pybl/rumours/" 
+                   class="text-blue-400 hover:text-blue-300">Particle Theory (UK/Ireland)</a>
+            </div>
+        </div>
+
+        <!-- Historical Archive -->
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
+            <h3 class="font-semibold text-slate-200 mb-4">Historical Archive</h3>
+            <div class="flex flex-wrap gap-2 text-sm">
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0102.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2002</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0203.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2003</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0304.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2004</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0405.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2005</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0506.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2006</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0607.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2007</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0708.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2008</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0809.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2009</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0910.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2010</a>
+                <a href="https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_1011.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2011</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2012.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2012</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2013.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2013</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2014.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2014</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2015.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2015</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2016.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2016</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2017.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2017</a>
+                <a href="https://www.physics.ncsu.edu/ntg/jobs/index_2018.html" class="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">2018</a>
+            </div>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-500">
+            <p>
+                Information is provided as a public service. No guarantee of accuracy is expressed or implied.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Job Data (embedded directly in the HTML)
+        const jobData = {
+            2026: [],
+            2025: [
+                {
+                    url: "https://recruit.apo.ucla.edu/JPF10131",
+                    code: "UCLA",
+                    university: "University of California, Los Angeles",
+                    position: "Assistant Professor",
+                    deadline: "March 2, 2025",
+                    shortlist: [],
+                    offers: []
+                },
+                {
+                    url: "https://indiana.peopleadmin.com/postings/25595",
+                    code: "IU",
+                    university: "Indiana University, Bloomington",
+                    position: "Assistant Professor, funded jointly with ExoHad Topical Collaboration",
+                    deadline: "November 8, 2024",
+                    shortlist: [],
+                    offers: []
+                },
+                {
+                    url: "https://inspirehep.net/jobs/2836493",
+                    code: "OSU",
+                    university: "The Ohio State University",
+                    position: "Assistant or Associate Professor",
+                    deadline: "November 15, 2024",
+                    shortlist: ["Tyler Gorda", "..."],
+                    offers: ["Tyler Gorda (accepted)"]
+                },
+                {
+                    url: "https://apply.interfolio.com/150779",
+                    code: "SMU",
+                    university: "Southern Methodist University",
+                    position: "Assistant Professor",
+                    deadline: "December 1, 2024",
+                    shortlist: ["Matthew Low", "Bianka Mecaj", "..."],
+                    offers: []
+                },
+                {
+                    url: "https://arizona.csod.com/ux/ats/careersite/4/home/requisition/20603",
+                    code: "UA",
+                    university: "University of Arizona",
+                    position: "Assistant Professor, bridge position with FRIB Theory Alliance",
+                    deadline: "November 18, 2024",
+                    shortlist: ["Chien-Yeah Seng", "Pooja Siwach", "..."],
+                    offers: ["Pooja Siwach (accepted)"]
+                },
+                {
+                    url: "https://apply.interfolio.com/152240",
+                    code: "UTK",
+                    university: "University of Tennessee, Knoxville",
+                    position: "Assistant Professor, funded jointly with NTNP DOE Topical Collaboration",
+                    deadline: "November 22, 2024",
+                    shortlist: ["Chien-Yeah Seng", "..."],
+                    offers: ["Chien-Yeah Seng (accepted)"]
+                }
+            ],
+            2024: [
+                {
+                    url: "https://facultycareers.fiu.edu/?posting=530979",
+                    code: "FIU",
+                    university: "Florida International University",
+                    position: "Assistant Professor",
+                    deadline: "Nov 30, 2023",
+                    shortlist: ["Shohini Bhattacharya", "..."],
+                    offers: []
+                },
+                {
+                    url: "https://inspirehep.net/jobs/2675946",
+                    code: "Iowa",
+                    university: "University of Iowa (HEP)",
+                    position: "Assistant Professor",
+                    deadline: "Nov 28, 2023",
+                    shortlist: ["Matheus Hostert", "Niklas Mueller", "Zahra Tabrizi", "Yu-Dai Tsai", "..."],
+                    offers: []
+                },
+                {
+                    url: "https://jobslist.kent.edu/cw/en-us/job/499905/faculty-tenure-track9-mo",
+                    code: "Kent State",
+                    university: "Kent State University and HEFTY DOE Topical Collaboration Bridge",
+                    position: "Assistant Professor",
+                    deadline: "Jan 1, 2024",
+                    shortlist: ["João Barata", "Kirill Boguslavski", "Andrew Hanlon", "..."],
+                    offers: ["Andrew Hanlon (accepted)"]
+                },
+                {
+                    url: "https://academicjobsonline.org/ajo/jobs/25843",
+                    code: "MIT",
+                    university: "Massachusetts Institute of Technology (Center for Theoretical Physics)",
+                    position: "Assistant Professor",
+                    deadline: "Dec 1, 2023",
+                    shortlist: ["..."],
+                    offers: []
+                },
+                {
+                    url: "https://careers.pageuppeople.com/782/cw/en-us/job/516103/assistant-professorfribnscl-faculty",
+                    code: "MSU",
+                    university: "Michigan State University",
+                    position: "Open rank faculty position in theoretical nuclear science",
+                    deadline: "Nov 15, 2023",
+                    shortlist: ["Agnieszka Sorensen", "Jan Steinheimer", "..."],
+                    offers: ["Agnieszka Sorensen (accepted)"]
+                },
+                {
+                    url: "https://inspirehep.net/jobs/2725754",
+                    code: "NMSU",
+                    university: "New Mexico State University",
+                    position: "Tenure track faculty position in computational theoretical nuclear physics - bridged with RIKEN-BNL",
+                    deadline: "Jan 2, 2024",
+                    shortlist: ["Shohini Bhattacharya", "Raza Sufian", "AJFM", "..."],
+                    offers: ["Shohini Bhattacharya (declined)", "Raza Sufian (accepted)"]
+                },
+                {
+                    url: "https://apply.interfolio.com/130592",
+                    code: "SBU",
+                    university: "Stony Brook University",
+                    position: "Assistant Professor in Theoretical Nuclear Physics - funded jointly with QGT DOE Topical Collaboration",
+                    deadline: "Nov 18, 2023",
+                    shortlist: ["Shohini Bhattacharya", "Adrien Florio", "Kyle Lee", "Niklas Mueller", "..."],
+                    offers: []
+                },
+                {
+                    url: "https://academicjobsonline.org/ajo/jobs/26610",
+                    code: "TU",
+                    university: "Temple University",
+                    position: "Tenure-track faculty position in Theoretical Nuclear Physics - funded jointly with QGT DOE Topical Collaboration and possibly RIKEN-BNL",
+                    deadline: "Dec 8, 2023",
+                    shortlist: ["Shohini Bhattacharya", "Farid Salazar", "Chien-Yeah Seng", "..."],
+                    offers: ["Farid Salazar (accepted)"]
+                },
+                {
+                    url: "https://academicjobsonline.org/ajo/jobs/26116",
+                    code: "UConn",
+                    university: "University of Connecticut (Storrs Campus)",
+                    position: "Tenure-track Assistant Professor in experimental or theoretical nuclear physics",
+                    deadline: "Dec 15, 2023",
+                    shortlist: ["Shohini Bhattacharya", "..."],
+                    offers: ["Shohini Bhattacharya (accepted)"]
+                }
+            ],
+            2023: [
+                {
+                    url: "https://inspirehep.net/jobs/2172047",
+                    code: "ANL",
+                    university: "Argonne National Laboratory",
+                    position: "Assistant Physicist in Nuclear Theory",
+                    deadline: "Dec. 23, 2022",
+                    shortlist: ["..."],
+                    offers: []
+                },
+                {
+                    url: "https://inspirehep.net/jobs/2606406",
+                    code: "W&M",
+                    university: "The College of William & Mary",
+                    position: "Assistant Professor of Physics – supported by a DOE Topical Collaboration",
+                    deadline: "Jan. 16, 2023",
+                    shortlist: ["Andrew Hanlon", "Andrew Jackura", "Arkaitz Rodas", "..."],
+                    offers: ["Andrew Jackura (accepted)"]
+                },
+                {
+                    url: "https://www.int.washington.edu/job-opportunities/research-assistant-professor-int-fellow",
+                    code: "INT",
+                    university: "Institute for Nuclear Theory",
+                    position: "INT Fellow (Research Assistant Professor, limited up to 5 years)",
+                    deadline: "Jan. 19, 2023",
+                    shortlist: ["Shohini Bhattacharya", "Farid Salazar", "Agnieszka Sorensen", "..."],
+                    offers: ["Farid Salazar (accepted)"]
+                },
+                {
+                    url: "https://www.llnl.gov/join-our-team/careers/find-your-job/all/nuclear%20theory/3743990000626199",
+                    code: "LLNL",
+                    university: "Lawrence Livermore National Laboratory",
+                    position: "Staff Scientist in Nuclear Theory",
+                    deadline: "unspecified",
+                    shortlist: ["..."],
+                    offers: []
+                },
+                {
+                    url: "https://inspirehep.net/jobs/2622515",
+                    code: "ODU",
+                    university: "Old Dominion University and Thomas Jefferson National Accelerator Facility",
+                    position: "2 joint Assistant Faculty positions (ODU & JLab), 1 supported by a DOE Topical Collaboration, another with the possibility of Associate",
+                    deadline: "Jan. 31, 2023",
+                    shortlist: ["..."],
+                    offers: []
+                },
+                {
+                    url: "https://recruit.ucdavis.edu/JPF05241",
+                    code: "UC Davis",
+                    university: "University of California Davis",
+                    position: "Assistant Professor, Department of Physics and Astronomy (open search)",
+                    deadline: "Nov. 18, 2022",
+                    shortlist: ["..."],
+                    offers: []
+                }
+            ]
+        };
+
+        // State
+        let currentYear = 2026;
+
+        // DOM Elements
+        const yearTabs = document.getElementById('yearTabs');
+        const jobsContainer = document.getElementById('jobsContainer');
+        const pageTitle = document.getElementById('pageTitle');
+        const yearSpan = document.getElementById('yearSpan');
+
+        // Create Job Card HTML
+        function createJobCard(job) {
+            const shortlistHtml = job.shortlist.length > 0 
+                ? job.shortlist.map(name => `<li class="text-slate-300">${name}</li>`).join('')
+                : '<span class="text-slate-500">No information yet</span>';
+
+            const offersHtml = job.offers.length > 0 
+                ? job.offers.map(name => `<li class="text-slate-100 font-bold">${name}</li>`).join('')
+                : '<span class="text-slate-500">No offers reported</span>';
+
+            return `
+                <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 shadow-lg hover:shadow-xl hover:border-slate-600 transition-all fade-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-semibold text-blue-400 hover:text-blue-300">
+                            <a href="${job.url}" target="_blank" rel="noopener noreferrer">
+                                ${job.university}
+                            </a>
+                        </h3>
+                        <span class="bg-slate-700 text-slate-200 text-sm px-2 py-1 rounded">
+                            ${job.code}
+                        </span>
                     </div>
                     
-                    <div>
-                        <h4 className="font-medium text-slate-200 mb-2">Offers:</h4>
-                        <div className="text-sm text-slate-400">
-                            {job.offers.length > 0 ? (
-                                <ul className="space-y-1">
-                                    {job.offers.map((name, idx) => (
-                                        <li key={idx} className="text-slate-100 font-bold">{name}</li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <span className="text-slate-500">No offers reported</span>
-                            )}
+                    <div class="space-y-2 mb-4">
+                        <p class="text-slate-300">${job.position}</p>
+                        <p class="text-sm text-slate-400">
+                            <span class="font-medium text-slate-300">Deadline:</span> ${job.deadline}
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-medium text-slate-200 mb-2">Short List:</h4>
+                            <div class="text-sm text-slate-400">
+                                ${job.shortlist.length > 0 ? `<ul class="space-y-1">${shortlistHtml}</ul>` : shortlistHtml}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-slate-200 mb-2">Offers:</h4>
+                            <div class="text-sm text-slate-400">
+                                ${job.offers.length > 0 ? `<ul class="space-y-1">${offersHtml}</ul>` : offersHtml}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            `;
+        }
 
-        const Navigation = ({ currentYear, onYearChange }) => {
+        // Render year tabs
+        function renderYearTabs() {
             const years = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019];
             
-            return (
-                <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-10">
-                    <div className="max-w-6xl mx-auto px-4">
-                        <div className="flex justify-between items-center h-16">
-                            <div className="text-xl font-bold text-slate-100">
-                                Nuclear Theory Jobs
-                            </div>
-                            
-                            <div className="flex space-x-1 overflow-x-auto">
-                                {years.map(year => (
-                                    <button
-                                        key={year}
-                                        onClick={() => onYearChange(year)}
-                                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                                            currentYear === year
-                                                ? 'bg-blue-600 text-white'
-                                                : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800'
-                                        }`}
-                                    >
-                                        {year}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            );
-        };
+            yearTabs.innerHTML = years.map(year => `
+                <button 
+                    onclick="changeYear(${year})" 
+                    class="px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
+                        currentYear === year
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800'
+                    }"
+                >
+                    ${year}
+                </button>
+            `).join('');
+        }
 
-        const InfoSection = () => (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-8">
-                <div className="grid md:grid-cols-3 gap-6 text-sm">
-                    <div>
-                        <h3 className="font-semibold text-blue-400 mb-2">About</h3>
-                        <p className="text-slate-300">
-                            This webpage tracks faculty positions in theoretical nuclear physics. 
-                            Information is submitted by volunteers and kept confidential.
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 className="font-semibold text-blue-400 mb-2">Contact</h3>
-                        <p className="text-slate-300">
-                            Submit information to: <br />
-                            <span className="font-mono text-blue-300">nucleartheoryjobs@gmail.com</span>
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 className="font-semibold text-blue-400 mb-2">Last Update</h3>
-                        <p className="text-slate-300">
-                            {window.jobDataMeta?.lastUpdate || "OSU position"}<br />
-                            {window.jobDataMeta?.lastUpdateDate || "May 9, 2025"}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        );
-
-        const ExternalLinks = () => (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
-                <h3 className="font-semibold text-slate-200 mb-4">Other Job Sites</h3>
-                <div className="grid md:grid-cols-2 gap-2 text-sm">
-                    <a href="https://www.astrobetter.com/wiki/tiki-index.php?page=Rumor+Mill+Faculty-Staff" 
-                       className="text-blue-400 hover:text-blue-300">Astrophysics</a>
-                    <a href="https://particle.physics.ucdavis.edu/rumor/doku.php" 
-                       className="text-blue-400 hover:text-blue-300">Particle Theory (N. America)</a>
-                    <a href="https://cmamorumor.wikispaces.com" 
-                       className="text-blue-400 hover:text-blue-300">Condensed Matter & AMO</a>
-                    <a href="https://antiann.org/yiyin/nucl_th_postdoc.html" 
-                       className="text-blue-400 hover:text-blue-300">Nuclear Theory Postdocs</a>
-                    <a href="https://gasdrumor.bplaced.net/" 
-                       className="text-blue-400 hover:text-blue-300">Particle Theory (Germanic/Nordic)</a>
-                    <a href="https://jobsrumormilljp.web.fc2.com/index.html" 
-                       className="text-blue-400 hover:text-blue-300">Particle Theory (Japan/E. Asia)</a>
-                    <a href="https://pyweb.swan.ac.uk/~pybl/rumours/" 
-                       className="text-blue-400 hover:text-blue-300">Particle Theory (UK/Ireland)</a>
-                </div>
-            </div>
-        );
-
-        const HistoricalArchive = () => {
-            const historicalYears = [
-                { year: "2002", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0102.html" },
-                { year: "2003", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0203.html" },
-                { year: "2004", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0304.html" },
-                { year: "2005", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0405.html" },
-                { year: "2006", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0506.html" },
-                { year: "2007", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0607.html" },
-                { year: "2008", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0708.html" },
-                { year: "2009", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0809.html" },
-                { year: "2010", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_0910.html" },
-                { year: "2011", url: "https://www.int.washington.edu/users/mjs5/NucRum/NTrumors_1011.html" },
-                { year: "2012", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2012.html" },
-                { year: "2013", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2013.html" },
-                { year: "2014", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2014.html" },
-                { year: "2015", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2015.html" },
-                { year: "2016", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2016.html" },
-                { year: "2017", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2017.html" },
-                { year: "2018", url: "https://www.physics.ncsu.edu/ntg/jobs/index_2018.html" }
-            ];
+        // Render jobs
+        function renderJobs() {
+            const jobs = jobData[currentYear] || [];
             
-            return (
-                <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 mt-8">
-                    <h3 className="font-semibold text-slate-200 mb-4">Historical Archive</h3>
-                    <div className="flex flex-wrap gap-2 text-sm">
-                        {historicalYears.map(({ year, url }) => (
-                            <a key={year} href={url} className="text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-slate-700">
-                                {year}
-                            </a>
-                        ))}
+            if (jobs.length === 0) {
+                jobsContainer.innerHTML = `
+                    <div class="text-center py-12 text-slate-500 fade-in">
+                        <p>No job data available for ${currentYear}</p>
+                        <p class="text-sm mt-2">Check other years or check back later for updates</p>
                     </div>
-                </div>
-            );
-        };
+                `;
+            } else {
+                jobsContainer.innerHTML = jobs.map(job => createJobCard(job)).join('');
+            }
+        }
 
-        const App = () => {
-            const [currentYear, setCurrentYear] = useState(2026);
-            const jobs = window.jobData[currentYear] || [];
+        // Change year function (global scope for onclick)
+        window.changeYear = function(year) {
+            currentYear = year;
+            pageTitle.textContent = `Theoretical Nuclear Physics Jobs ${year}`;
+            yearSpan.textContent = year;
+            renderYearTabs();
+            renderJobs();
+        }
 
-            return (
-                <div className="min-h-screen bg-slate-900">
-                    <Navigation currentYear={currentYear} onYearChange={setCurrentYear} />
-                    
-                    <div className="max-w-6xl mx-auto px-4 py-8">
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-bold text-slate-100 mb-2">
-                                Theoretical Nuclear Physics Jobs {currentYear}
-                            </h1>
-                            <p className="text-slate-400">
-                                Faculty positions and hiring information for the {currentYear} academic job market
-                            </p>
-                        </div>
-                        
-                        <InfoSection />
-                        
-                        <div className="space-y-6">
-                            {jobs.length > 0 ? (
-                                jobs.map((job, index) => (
-                                    <JobCard key={index} job={job} />
-                                ))
-                            ) : (
-                                <div className="text-center py-12 text-slate-500">
-                                    <p>No job data available for {currentYear}</p>
-                                    <p className="text-sm mt-2">Check other years or check back later for updates</p>
-                                </div>
-                            )}
-                        </div>
-                        
-                        <ExternalLinks />
-                        <HistoricalArchive />
-                        
-                        <div className="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-500">
-                            <p>
-                                Information is provided as a public service. No guarantee of accuracy is expressed or implied.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+        // Initialize the page
+        function init() {
+            renderYearTabs();
+            renderJobs();
+        }
 
-        ReactDOM.render(<App />, document.getElementById('root'));
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
