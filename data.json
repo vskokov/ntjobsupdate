@@ -1,12 +1,22 @@
 {
   "lastUpdate": {
-    "description": "OSU position",
-    "date": "May 9, 2025"
+    "description": "UC Berkeley Position Posted",
+    "date": "October 14, 2025"
   },
   "currentYear": 2026,
   "contactEmail": "nucleartheoryjobs@gmail.com",
   "jobs": {
-    "2026": [],
+    "2026": [
+      {
+        "url": "https://aprecruit.berkeley.edu/JPF05037",
+        "code": "UC Berkeley",
+        "university": "University of California, Berkeley",
+        "position": "Assistant Professor",
+        "deadline": "November 14, 2025",
+        "shortlist": [],
+        "offers": []
+      }
+    ],
     "2025": [
       {
         "url": "https://recruit.apo.ucla.edu/JPF10131",
