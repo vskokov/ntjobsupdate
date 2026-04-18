@@ -1,12 +1,21 @@
 {
   "lastUpdate": {
-    "description": "UC Berkeley Position Posted",
-    "date": "October 14, 2025"
+    "description": "Los Alamos National Laboratory Posted",
+    "date": "April 18, 2026"
   },
   "currentYear": 2026,
   "contactEmail": "nucleartheoryjobs@gmail.com",
   "jobs": {
     "2026": [
+      {
+        "url": "https://lanl.jobs/search/jobdetails/staff-scientist-in-applied-nuclear-theory-scientists-23/f3308604-432b-4084-ba33-1d379fb41dbe",
+        "code": "LANL",
+        "university": "Theoretical Division of Los Alamos National Laboratory",
+        "position": "Scientist 2 or Scientist 3 level",
+        "deadline": "June 30, 2026",
+        "shortlist": [],
+        "offers": []
+      },
       {
         "url": "https://aprecruit.berkeley.edu/JPF05037",
         "code": "UC Berkeley",
