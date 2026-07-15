@@ -1,12 +1,21 @@
 {
   "lastUpdate": {
     "description": "Los Alamos National Laboratory Posted",
-    "date": "April 18, 2026"
+    "date": "July 15, 2026"
   },
   "currentYear": 2026,
   "contactEmail": "nucleartheoryjobs@gmail.com",
   "jobs": {
     "2026": [
+      {
+        "url": "https://lanl.jobs/search/jobdetails/staff-scientist-2-in-nuclear-theory/1d80a1f9-699f-486f-88ac-10dbba6f21bd",
+        "code": "LANL",
+        "university": "T-2 group,  Los Alamos National Laboratory",
+        "position": "Staff Scientist position",
+        "deadline": " September 30, 2026",
+        "shortlist": [],
+        "offers": []
+      },
       {
         "url": "https://lanl.jobs/search/jobdetails/staff-scientist-in-applied-nuclear-theory-scientists-23/f3308604-432b-4084-ba33-1d379fb41dbe",
         "code": "LANL",
