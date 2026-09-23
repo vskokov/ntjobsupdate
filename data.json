@@ -26,6 +26,16 @@
         "offers": []
       },
       {
+        "url": "https://apply.interfolio.com/193598",
+        "code": "Vanderbilt University",
+        "university": "Vanderbilt University",
+        "position": "Assistant Professor",
+        "deadline": "October 31, 2026",
+        "shortlist": [],
+        "offers": []
+      }    ],
+    "2025": [
+      {
         "url": "https://aprecruit.berkeley.edu/JPF05037",
         "code": "UC Berkeley",
         "university": "University of California, Berkeley",
@@ -33,9 +43,7 @@
         "deadline": "November 14, 2025",
         "shortlist": [],
         "offers": []
-      }
-    ],
-    "2025": [
+      },
       {
         "url": "https://recruit.apo.ucla.edu/JPF10131",
         "code": "UCLA",
