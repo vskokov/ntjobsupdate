@@ -1,7 +1,7 @@
 {
   "lastUpdate": {
-    "description": "Vanderbilt University Posted",
-    "date": "September 23, 2026"
+    "description": "University of Houston",
+    "date": "October 22, 2026"
   },
   "currentYear": 2026,
   "contactEmail": "nucleartheoryjobs@gmail.com",
@@ -33,7 +33,17 @@
         "deadline": "October 31, 2026",
         "shortlist": [],
         "offers": []
-      }    ],
+      }
+      {
+        "url": "https://careers.uh.edu/jobs/assistant-professor-nuclear-theorist-houston-texas-united-states",
+        "code": "UH",
+        "university": "University of Houston",
+        "position": "Assistant Professor - specializing in neutrino-nucleus interactions",
+        "deadline": "December 1, 2026",
+        "shortlist": [],
+        "offers": []
+      }
+    ],
     "2025": [
       {
         "url": "https://aprecruit.berkeley.edu/JPF05037",
