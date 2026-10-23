@@ -1,12 +1,21 @@
 {
   "lastUpdate": {
-    "description": "University of Houston",
-    "date": "October 22, 2026"
+    "description": "CalTech",
+    "date": "October 23, 2026"
   },
   "currentYear": 2026,
   "contactEmail": "nucleartheoryjobs@gmail.com",
   "jobs": {
     "2026": [
+      {
+        "url": "https://applications.caltech.edu/jobs/physics",
+        "code": "CalTech",
+        "university": "California Institute of Technology",
+        "position": "Faculty Position - broad search in all areas of experiment and theory",
+        "deadline": " November 1, 2026",
+        "shortlist": [],
+        "offers": []
+      },
       {
         "url": "https://lanl.jobs/search/jobdetails/staff-scientist-2-in-nuclear-theory/1d80a1f9-699f-486f-88ac-10dbba6f21bd",
         "code": "LANL",
